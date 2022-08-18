@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('style/assets/css/bootstrap.css')}}">
 
-    <link rel="stylesheet" href="{{asset ('style/') }}assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="{{asset ('style/assets/vendors/iconly/bold.css') }}">
 
     <link rel="stylesheet" href="{{asset ('style/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{asset ('style/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -53,7 +53,7 @@
                         </li>
                         
                         <li class="sidebar-item ">
-                            <a href="{{asset ('/detail-alert') }}" class='sidebar-link'>
+                            <a href="{{asset ('/alertgroup') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Detail Alert</span>
                             </a>
@@ -96,68 +96,29 @@
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Alert ID</th>
-                                        <th>Node</th>
+                                        <th>Node Name</th>
                                         <th>IP Address</th>
+                                        <th>Message</th>
+                                        <th>Chat ID</th>
                                         <th>PIC</th>
-                                        <th>Status</th>
+                                        <th>Created</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($list_alert as $result)
                                     <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Aldy Kurniawan S</td>
-                                        <td>
-                                            <span class="badge bg-success">Up</span>
-                                        </td>
+                                        <td>{{ $result->id }}</td>
+                                        <td>{{ $result->alertid }}</td>
+                                        <td>{{ $result->nodename }}</td>
+                                        <td>{{ $result->nodeipaddress }}</td>
+                                        <td>{{ $result->alertmessage }}</td>
+                                        <td>{{ $result->chatid }}</td>
+                                        <td>{{ $result->pic }}</td>
+                                        <td>{{ $result->created }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Hirianinda</td>
-                                        <td>
-                                            <span class="badge bg-danger">Down</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Rizal</td>
-                                        <td>
-                                            <span class="badge bg-success">Up</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Aldy Kurniawan S</td>
-                                        <td>
-                                            <span class="badge bg-success">Up</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Aldy Kurniawan S</td>
-                                        <td>
-                                            <span class="badge bg-success">Up</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>Aldy Kurniawan S</td>
-                                        <td>
-                                            <span class="badge bg-success">Up</span>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('style/assets/css/bootstrap.css')}}">
 
-    <link rel="stylesheet" href="{{asset ('style/') }}assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="{{asset ('style/assets/vendors/iconly/bold.css') }}">
 
     <link rel="stylesheet" href="{{asset ('style/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{asset ('style/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -53,7 +53,7 @@
                         </li>
                         
                         <li class="sidebar-item active">
-                            <a href="{{asset ('/alert') }}" class='sidebar-link'>
+                            <a href="{{asset ('/alertgroup') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Detail Alert</span>
                             </a>
@@ -96,82 +96,36 @@
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
+                                        <th>AlertGroupID</th>
                                         <th>Alert ID</th>
-                                        <th>Node</th>
-                                        <th>IP Address</th>
+                                        <th>Node Name</th>
+                                        <th>Node IP Address</th>
                                         <th>Location</th>
                                         <th>CPU Load</th>
                                         <th>Percent Memory Used</th>
                                         <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Updated</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($list_alertgroup as $result)
                                     <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
+                                        <td>{{ $result->alertgroupid }}</td>
+                                        <td>{{ $result->alertid }}</td>
+                                        <td>{{ $result->nodename }}</td>
+                                        <td>{{ $result->nodeipaddress }}</td>
+                                        <td>{{ $result->location }}</td>
+                                        <td>{{ $result->cpuload }}</td>
+                                        <td>{{ $result->memoryused }}</td>
                                         <td>
-                                            <span class="badge bg-warning">Warning</span>
+                                            <span if={{$result->status=='Down'}} class="badge bg-danger">{{ $result->status }}</span>
+                                            <span if={{$result->status=='Warning'}} class="badge bg-warning">{{ $result->status }}</span>
                                         </td>
+                                        <td>{{ $result->created_at }}</td>
+                                        <td>{{ $result->updated_at }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
-                                        <td>
-                                            <span class="badge bg-danger">Critical</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
-                                        <td>
-                                            <span class="badge bg-warning">Warning</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
-                                        <td>
-                                            <span class="badge bg-warning">Warning</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
-                                        <td>
-                                            <span class="badge bg-danger">Critical</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>8274829</td>
-                                        <td>VMW-PROD-DB-SPAN</td>
-                                        <td>172.99.32.32</td>
-                                        <td>DC Sentul</td>
-                                        <td>14%</td>
-                                        <td>92%</td>
-                                        <td>
-                                            <span class="badge bg-warning">Warning</span>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -191,14 +145,7 @@
     </div>
     <script src="{{asset ('style/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset ('style/assets/js/bootstrap.bundle.min.js') }}"></script>
-
     <script src="{{asset ('style/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
-    <script>
-        // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
-
     <script src="{{asset ('style/assets/js/main.js') }}"></script>
     <script src="{{asset ('style/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{asset ('style/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -207,6 +154,11 @@
     <script src="{{asset ('style/assets/js/pages/dashboard.js') }}"></script>
 
     <script src="{{asset ('style/assets/js/main.js') }}"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
 </body>
 
 </html>

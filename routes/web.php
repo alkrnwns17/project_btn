@@ -17,14 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function() {
+Route::resource('alertgroup', 'AlertGroupController');
+
+Route::resource('alert', 'AlertController');
+
+
+Route::get('/testing', function () {
     return view('index');
-});
-
-Route::get('/alert', function() {
-    return view('table-datatable');
-});
-
-Route::get('/detail-alert', function() {
-    return view('alert-detail');
 });
